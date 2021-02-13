@@ -1,4 +1,5 @@
-data2<-read.cvs('~/Desktop/R/D_prymary_analysis0106.csv',fileEncoding="CP932")
+library(dplyr)
+data2<-read.csv('~/Desktop/R/D_prymary_analysis0106.csv',fileEncoding="CP932")
 data4 <- na.omit(data2)
 df <- data4
 # allocationの列の０と１を変更する
