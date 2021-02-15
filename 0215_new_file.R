@@ -1,5 +1,6 @@
 library(dplyr)
 library(ggplot2)
+library(causalTree)
 
 #下記のコードはファイルを置いている場所によって変化します
 data1 <-read.csv('~/Desktop/R/D_prymary_analysis0106.csv',fileEncoding="CP932")
@@ -67,7 +68,19 @@ df$income_income_2 <- factor(df$BL_income, levels=c('収入なし','100万未満
 #収入/ギャンブルを計算する
 df$income_gamble_rate <- as.numeric(as.character(df$income_gamble_rate_2)) * 100000 / df$BL_gamble_amount
 
-#CausalTreeを作成する
-tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + BL_gamble_frequency + BL_gamble_type + BL_marital_status + BL_gamble_first_age + BL_gamble_knowledge + BL_LINE_num_messages + d28_gamble_amount + d28_gamble_frequency + income_gamble_rate, data=df, treatment = df$allocation, split.Rule = "CT",cv.option = "CT",split.Honest = T,cv.Honest = T,split.Bucket = F,xval=5,cp=0,minsize = 20)
+#下記の出力は203,72となる
+dim(data2)
+
+#203個のデータの内、150個を訓練データとして用いる
+#ランダムに150個を抽出する
+train_sample <- sample(203,150)
+train_sample
+
+#訓練データとテストデータに分割する
+df_train <- df[train_sample, ]
+df_test <- df[-train_sample, ]
+
+#df_trainに対してCausalTreeを作成する
+tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + BL_gamble_frequency + BL_gamble_type + BL_marital_status + BL_gamble_first_age + BL_gamble_knowledge + BL_LINE_num_messages + d28_gamble_amount + d28_gamble_frequency + income_gamble_rate, data=df_train, treatment = df$allocation, split.Rule = "CT",cv.option = "CT",split.Honest = T,cv.Honest = T,split.Bucket = F,xval=5,cp=0,minsize = 20)
 
 rpart.plot(tree)
