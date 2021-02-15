@@ -64,15 +64,16 @@ df$d28_gamble_frequency[df$d28_gamble_frequency=="月に1回"]<-0
 #収入/ギャンブル総額という新しい特徴量を作成する
 #まずはBL_incomeのカテゴリ値を数値に変更する
 #収入なし→0、100万未満→0.5、100-300未満→2、300-500→4、500-700→6、700-900→8、900-1100→10、1100~→12と変換する
-df$income_income_2 <- factor(df$BL_income, levels=c('収入なし','100万未満','100-300万未満','300-500万未満','500-700万未満','700-900万未満','900-1100万未満','1100万以上'),labels=c('0','0.5','2','4','6','8','10','12'))
+df$BL_income_2 <- factor(df$BL_income, levels=c('収入なし','100万未満','100-300万未満','300-500万未満','500-700万未満','700-900万未満','900-1100万未満','1100万以上'),labels=c('0','0.5','2','4','6','8','10','12'))
 #収入/ギャンブルを計算する
-df$income_gamble_rate <- as.numeric(as.character(df$income_gamble_rate_2)) * 100000 / df$BL_gamble_amount
+df$income_gamble_rate <- as.numeric(as.character(df$BL_income_2)) * 100000 / df$BL_gamble_amount
 
 #下記の出力は203,72となる
 dim(data2)
 
 #203個のデータの内、150個を訓練データとして用いる
 #ランダムに150個を抽出する
+set.seed(123)
 train_sample <- sample(203,150)
 train_sample
 
