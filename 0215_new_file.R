@@ -82,6 +82,6 @@ df_train <- df[train_sample, ]
 df_test <- df[-train_sample, ]
 
 #df_trainに対してCausalTreeを作成する
-tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + BL_gamble_frequency + BL_gamble_type + BL_marital_status + BL_gamble_first_age + BL_gamble_knowledge + BL_LINE_num_messages + d28_gamble_amount + d28_gamble_frequency + income_gamble_rate, data=df_train, treatment = df_train$allocation, split.Rule = "CT",cv.option = "CT",split.Honest = T,cv.Honest = T,split.Bucket = F,xval=5,cp=0,minsize = 20)
+tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + BL_gamble_frequency + BL_gamble_type + BL_marital_status + BL_gamble_first_age + BL_gamble_knowledge + BL_LINE_num_messages + d28_gamble_amount + d28_gamble_frequency + income_gamble_rate, data=df_train, treatment = df_train$allocation, split.Rule = "CT",cv.option = "CT",split.Honest = T,cv.Honest = T,split.Bucket = F,xval=5,cp=0,minsize = 2)
 
 rpart.plot(tree)
