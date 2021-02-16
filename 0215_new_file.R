@@ -82,6 +82,15 @@ df_train <- df[train_sample, ]
 df_test <- df[-train_sample, ]
 
 #df_trainに対してCausalTreeを作成する
+#出力結果は"2021_02_15_CausalTree"
 tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + BL_gamble_frequency + BL_gamble_type + BL_marital_status + BL_gamble_first_age + BL_gamble_knowledge + BL_LINE_num_messages + d28_gamble_amount + d28_gamble_frequency + income_gamble_rate, data=df_train, treatment = df_train$allocation, split.Rule = "CT",cv.option = "CT",split.Honest = T,cv.Honest = T,split.Bucket = F,xval=5,cp=0,minsize = 2)
 
 rpart.plot(tree)
+
+#df_trainの中で更に50個を選択して結果を出力する
+#出力結果は"2021_02_16_CausalTree_partition50_No1"
+train_partition <- sample(150,50)
+df_train_par1 <- df_train[train_partition, ]
+tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + BL_gamble_frequency + BL_gamble_type + BL_marital_status + BL_gamble_first_age + BL_gamble_knowledge + BL_LINE_num_messages + d28_gamble_amount + d28_gamble_frequency + income_gamble_rate, data=df_train_par1, treatment = df_train_par1$allocation, split.Rule = "CT",cv.option = "CT",split.Honest = T,cv.Honest = T,split.Bucket = F,xval=5,cp=0,minsize = 2)
+rpart.plot(tree)
+
