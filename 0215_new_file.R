@@ -88,9 +88,26 @@ tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + B
 rpart.plot(tree)
 
 #df_trainの中で更に50個を選択して結果を出力する
-#出力結果は"2021_02_16_CausalTree_partition50_No1"
+#出力結果は"2021_02_16_CausalTree_partition50_No1.png"
 train_partition <- sample(150,50)
 df_train_par1 <- df_train[train_partition, ]
 tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + BL_gamble_frequency + BL_gamble_type + BL_marital_status + BL_gamble_first_age + BL_gamble_knowledge + BL_LINE_num_messages + d28_gamble_amount + d28_gamble_frequency + income_gamble_rate, data=df_train_par1, treatment = df_train_par1$allocation, split.Rule = "CT",cv.option = "CT",split.Honest = T,cv.Honest = T,split.Bucket = F,xval=5,cp=0,minsize = 2)
 rpart.plot(tree)
+
+#さらにdf_trainの中から50個を選択して結果を出力する
+#出力結果は"2021_02_16_CausalTree_partition50_No2.png"
+train_partition_2 <- sample(150,50)
+df_train_par2 <- df_train[train_partition_2, ]
+tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + BL_gamble_frequency + BL_gamble_type + BL_marital_status + BL_gamble_first_age + BL_gamble_knowledge + BL_LINE_num_messages + d28_gamble_amount + d28_gamble_frequency + income_gamble_rate, data=df_train_par2, treatment = df_train_par2$allocation, split.Rule = "CT",cv.option = "CT",split.Honest = T,cv.Honest = T,split.Bucket = F,xval=5,cp=0,minsize = 2)
+rpart.plot(tree)
+
+#さらにdf_trainの中から50個を選択して結果を出力する
+#出力結果は"2021_02_16_CausalTree_partition50_No3.png"
+train_partition_3 <- sample(150,50)
+df_train_par3 <- df_train[train_partition_3, ]
+tree <- causalTree(PGSI_change ~ BL_age + BL_gamble_acuse + BL_gamble_amount + BL_gamble_frequency + BL_gamble_type + BL_marital_status + BL_gamble_first_age + BL_gamble_knowledge + BL_LINE_num_messages + d28_gamble_amount + d28_gamble_frequency + income_gamble_rate, data=df_train_par3, treatment = df_train_par3$allocation, split.Rule = "CT",cv.option = "CT",split.Honest = T,cv.Honest = T,split.Bucket = F,xval=5,cp=0,minsize = 2)
+rpart.plot(tree)
+
+
+
 
