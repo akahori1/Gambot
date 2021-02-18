@@ -25,6 +25,6 @@ df_reserve <- df
 
 #df_Yとdf_Wで使った列を削除する
 df <- df[-1]
-df <- df[-14]
+df <- df[-15]
 
 
