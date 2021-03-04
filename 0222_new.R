@@ -61,3 +61,5 @@ print(df_data$estimate_CATE$predictions)
 df_data$estimate <- df_data$estimate_CATE$predictions
 
 readr::write_excel_csv(df_data[c('BL_gamble_amount','BL_income','BL_education','BL_GA','estimate')],'~/Desktop/R/df_test_causalforest_0222_new.csv')
+
+
